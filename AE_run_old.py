@@ -160,9 +160,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     #read data
-    omics_data1 = pd.read_csv(args.path1, header=0, index_col=0)
-    omics_data2 = pd.read_csv(args.path2, header=0, index_col=0)
-    omics_data3 = pd.read_csv(args.path3, header=0, index_col=0)
+    omics_data1 = pd.read_csv(args.path1, header=0, index_col=None)
+    omics_data2 = pd.read_csv(args.path2, header=0, index_col=None)
+    omics_data3 = pd.read_csv(args.path3, header=0, index_col=None)
 
     #Check whether GPUs are available
     device = torch.device('cpu')

@@ -164,7 +164,7 @@ if __name__ == '__main__':
 
     elif args.mode == 1:
         # load test samples
-        test_sample_df = pd.read_csv(args.testsample, header=0, index_col=0)
+        test_sample_df = pd.read_csv(args.testsample, header=0, index_col=None)
         test_sample = test_sample_df.iloc[:, 0].tolist()
         all_sample = data['Sample'].tolist()
         train_sample = list(set(all_sample)-set(test_sample))

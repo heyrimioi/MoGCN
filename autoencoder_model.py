@@ -6,9 +6,10 @@
 import torch
 from torch import nn
 from matplotlib import pyplot as plt
+import os
 
 class MMAE(nn.Module):
-    def __init__(self, in_feas_dim, latent_dim, a=0.4, b=0.3, c=0.3):
+    def __init__(self, outdir, in_feas_dim, latent_dim, a=0.4, b=0.3, c=0.3):
         '''
         :param in_feas_dim: a list, input dims of omics data
         :param latent_dim: dim of latent layer
@@ -22,7 +23,8 @@ class MMAE(nn.Module):
         self.c = c
         self.in_feas = in_feas_dim
         self.latent = latent_dim
-
+        self.save_model_path = os.path.join(outdir,"res/model/AE/")
+        self.save_data_path = os.path.join(outdir,"res/result/")
         #encoders, multi channel input
         self.encoder_omics_1 = nn.Sequential(
             nn.Linear(self.in_feas[0], self.latent),
@@ -94,10 +96,10 @@ class MMAE(nn.Module):
 
             #save the model every 10 epochs, used for feature extraction
             if (epoch+1) % 10 ==0:
-                torch.save(self, 'model/AE/model_{}.pkl'.format(epoch+1))
+                torch.save(self, self.save_model_path+'model_{}.pkl'.format(epoch+1))
 
         #draw the training loss curve
         plt.plot([i + 1 for i in range(epochs)], loss_ls)
         plt.xlabel('epochs')
         plt.ylabel('loss')
-        plt.savefig('result/AE_train_loss.png')
+        plt.savefig(self.save_data_path + 'AE_train_loss.png')

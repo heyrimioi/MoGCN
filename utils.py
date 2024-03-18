@@ -16,7 +16,7 @@ def load_data(adj, fea, lab, threshold=0.005):
     print('loading data...')
     adj_df = pd.read_csv(adj, header=0, index_col=None)
     fea_df = pd.read_csv(fea, header=0, index_col=None)
-    label_df = pd.read_csv(lab, header=0, index_col=None)
+    label_df = pd.read_csv(lab, header=0, index_col=0)
 
     if adj_df.shape[0] != fea_df.shape[0] or adj_df.shape[0] != label_df.shape[0]:
         print('Input files must have same samples.')

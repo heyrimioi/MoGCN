@@ -22,7 +22,7 @@ if __name__ == '__main__':
                         help='Distance metric to compute. Must be one of available metrics in :py:func scipy.spatial.distance.pdist.')
     parser.add_argument('--K', '-k', type=int, default=20,
                         help='(0, N) int, number of neighbors to consider when creating affinity matrix. See Notes of :py:func snf.compute.affinity_matrix for more details. Default: 20.')
-    parser.add_argument('--mu', '-mu', type=float, default=0.5,
+    parser.add_argument('--mu', '-mu', type=int, default=0.5,
                         help='(0, 1) float, Normalization factor to scale similarity kernel when constructing affinity matrix. See Notes of :py:func snf.compute.affinity_matrix for more details. Default: 0.5.')
     args = parser.parse_args()
 
@@ -31,9 +31,9 @@ if __name__ == '__main__':
     save_data_path = os.path.join(out_dir, "res/result/")
 
     print('Load data files...')
-    omics_data_1 = pd.read_csv(args.path[0], header=0, index_col=0)
-    omics_data_2 = pd.read_csv(args.path[1], header=0, index_col=0)
-    omics_data_3 = pd.read_csv(args.path[2], header=0, index_col=0)
+    omics_data_1 = pd.read_csv(args.path[0], header=0, index_col=None)
+    omics_data_2 = pd.read_csv(args.path[1], header=0, index_col=None)
+    omics_data_3 = pd.read_csv(args.path[2], header=0, index_col=None)
     print(omics_data_1.shape, omics_data_2.shape, omics_data_3.shape)
 
     if omics_data_1.shape[0] != omics_data_2.shape[0] or omics_data_1.shape[0] != omics_data_3.shape[0]:
